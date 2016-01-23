@@ -15,6 +15,8 @@
 //
 
 
+mod socks_core;
+
 fn main() {
     println!("SOCKS 0.0.0");
 }
