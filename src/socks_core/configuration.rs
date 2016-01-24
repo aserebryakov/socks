@@ -16,4 +16,16 @@
 
 
 pub struct Configuration {
+    non_executable_criterias : Vec<String>,
+    query_criterias: Vec<String>,
+}
+
+
+impl Configuration {
+    pub fn clone(&self) -> Configuration {
+        Configuration {
+            non_executable_criterias : self.non_executable_criterias.clone(),
+            query_criterias : self.query_criterias.clone(),
+        }
+    }
 }
