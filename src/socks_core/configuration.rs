@@ -18,14 +18,35 @@
 pub struct Configuration {
     non_executable_criterias : Vec<String>,
     query_criterias: Vec<String>,
+    host : String,
+    script_name : String,
 }
 
 
 impl Configuration {
+    pub fn new_empty() -> Configuration {
+        Configuration {
+            non_executable_criterias : Vec::<String>::new(),
+            query_criterias: Vec::<String>::new(),
+            host : String::new(),
+            script_name : String::new(),
+        }
+    }
+
     pub fn clone(&self) -> Configuration {
         Configuration {
             non_executable_criterias : self.non_executable_criterias.clone(),
             query_criterias : self.query_criterias.clone(),
+            host : self.host.clone(),
+            script_name : self.script_name.clone(),
         }
+    }
+
+    pub fn non_executable_criterias(&self) -> &Vec<String> {
+        &self.non_executable_criterias
+    }
+
+    pub fn query_criterias(&self) -> &Vec<String> {
+        &self.query_criterias
     }
 }

@@ -19,7 +19,7 @@ pub struct ScriptLine {
     number : u64,
     executable : bool,
     data : String,
-    query : bool
+    query : bool,
 }
 
 
@@ -52,15 +52,31 @@ impl ScriptLine {
         self.number
     }
 
+    pub fn set_number(&mut self, n : &u64) {
+        self.number = *n;
+    }
+
     pub fn executable(&self) -> bool {
         self.executable
     }
 
-    pub fn data(&self) -> String {
-        self.data.clone()
+    pub fn set_executable(&mut self, e : &bool) {
+        self.executable = *e;
+    }
+
+    pub fn data(&self) -> &String {
+        &self.data
+    }
+
+    pub fn set_data(&mut self, d : &String) {
+        self.data = d.clone();
     }
 
     pub fn query(&self) -> bool {
         self.query
+    }
+
+    pub fn set_query(&mut self, q : &bool) {
+        self.query = q.clone();
     }
 }

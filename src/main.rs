@@ -14,9 +14,14 @@
 //   limitations under the License.
 //
 
+extern crate regex;
 
 mod socks_core;
+use socks_core::configuration::Configuration;
+use socks_core::script_reader::ScriptReader;
 
 fn main() {
+    let config = Configuration::new_empty();
+    let reader = ScriptReader::new(&config);
     println!("SOCKS 0.0.0");
 }
