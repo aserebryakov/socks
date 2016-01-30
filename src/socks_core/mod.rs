@@ -15,9 +15,11 @@
 //
 
 
-mod script_line;
 pub mod script_reader;
-mod response;
-mod command;
 pub mod executer;
 pub mod configuration;
+mod script_line;
+mod connection;
+mod response;
+mod command;
+mod string_connection;

@@ -15,21 +15,27 @@
 //
 
 
-pub struct Response {
-    data : Vec<u8>,
+use socks_core::connection::Connection;
+
+
+pub struct StringConnection {
+    connection : Connection
 }
 
 
-impl Response {
-    pub fn new_empty() -> Response {
-        Response {
-            data : Vec::<u8>::new(),
+impl StringConnection {
+    pub fn new(addr : &str) -> StringConnection {
+        StringConnection {
+            connection : Connection::new(addr),
         }
     }
 
-    pub fn new(d : &Vec<u8>) -> Response {
-        Response {
-            data : d.clone(),
-        }
+    pub fn send(&mut self, data : &String) {
+        self.connection.send(&data.as_bytes().to_vec());
+    }
+
+    pub fn receive(&mut self, data : &mut String) {
+        let mut raw_data = Vec::<u8>::new();
+        self.connection.receive(&mut raw_data);
     }
 }

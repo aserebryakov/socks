@@ -16,9 +16,33 @@
 
 
 use socks_core::script_line::ScriptLine;
+use socks_core::configuration::Configuration;
+use socks_core::string_connection::StringConnection;
 
 
-struct Executer {
+pub struct Executer {
+    configuration : Configuration,
     script : Vec<ScriptLine>,
     pc : u64,
+    connection : StringConnection,
+}
+
+
+impl Executer {
+    pub fn new(c : &Configuration, s : Vec<ScriptLine>) -> Executer {
+        Executer {
+            configuration : c.clone(),
+            script : s,
+            pc : 0,
+            connection : StringConnection::new(c.host()),
+        }
+    }
+
+    pub fn run_script(&mut self) {
+        for line in &self.script {
+            if line.executable() == true {
+                self.connection.send(line.data());
+            }
+        }
+    }
 }

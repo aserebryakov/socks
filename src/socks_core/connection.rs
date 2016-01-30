@@ -33,17 +33,11 @@ impl Connection {
         }
     }
 
-    pub fn send(&mut self, data : &Vec::<u8>, query : bool) -> Vec<u8> {
-        let mut raw_bytes = Vec::<u8>::new();
+    pub fn send(&mut self, data : &Vec<u8>) {
+        self.stream.write(data);
+    }
 
-        if cmd.executable() {
-            self.stream.write(data);
-
-            if cmd.query() {
-                self.stream.read_to_end(&mut raw_bytes);
-            }
-        }
-
-        raw_bytes
+    pub fn receive(&mut self, data : &mut Vec<u8>) {
+        self.stream.read_to_end(data);
     }
 }

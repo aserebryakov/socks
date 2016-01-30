@@ -55,6 +55,10 @@ impl Configuration {
         &self.query_criterias
     }
 
+    pub fn host(&self) -> &String {
+        &self.host
+    }
+
     pub fn write(&self) {
         println!("{:?}", self.non_executable_criterias);
         println!("{:?}", self.query_criterias);

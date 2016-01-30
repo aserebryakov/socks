@@ -19,9 +19,19 @@ extern crate regex;
 mod socks_core;
 use socks_core::configuration::Configuration;
 use socks_core::script_reader::ScriptReader;
+use socks_core::executer::Executer;
 
 fn main() {
-    let config = Configuration::new_empty();
+    println!("socks 0.0.0");
+
+    let config = Configuration::new(
+        &vec![r"^#".to_string(), r"^$".to_string()],
+        &vec![r"\?".to_string()],
+        &"localhost:40001".to_string()
+        );
     let reader = ScriptReader::new(&config);
-    println!("SOCKS 0.0.0");
+
+    let script = reader.prepare_script(&"test.txt".to_string());
+    let mut executer = Executer::new(&config, script);
+    executer.run_script();
 }

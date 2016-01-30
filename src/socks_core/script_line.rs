@@ -42,6 +42,15 @@ impl ScriptLine {
         }
     }
 
+    pub fn clone(&self) -> ScriptLine {
+        ScriptLine {
+            number : self.number.clone(),
+            executable : self.executable.clone(),
+            data : self.data.clone(),
+            query : self.query.clone(),
+        }
+    }
+
     pub fn number(&self) -> u64 {
         self.number
     }
