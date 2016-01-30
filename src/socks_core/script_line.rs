@@ -34,15 +34,9 @@ impl ScriptLine {
     }
 
     pub fn new_from_line(line : &String) -> ScriptLine {
-        let mut executable = false;
-
-        if line != "" {
-            executable = true;
-        }
-
         ScriptLine {
             number : 0,
-            executable : executable,
+            executable : false,
             data : line.clone(),
             query : false,
         }
@@ -78,5 +72,12 @@ impl ScriptLine {
 
     pub fn set_query(&mut self, q : &bool) {
         self.query = q.clone();
+    }
+
+    pub fn dbg_print(&self) {
+        println!("number = {}", self.number);
+        println!("executable = {}", self.executable);
+        println!("data = \"{}\"", self.data);
+        println!("query = {}", self.query);
     }
 }

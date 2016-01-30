@@ -50,7 +50,7 @@ impl ScriptReader {
 
             line.set_number(&count);
 
-            if self.match_criterias(&c, self.configuration.non_executable_criterias()) {
+            if self.match_criterias(&c, self.configuration.non_executable_criterias()) != true {
                 line.set_executable(&true);
             }
 
@@ -82,18 +82,14 @@ impl ScriptReader {
     }
 
     fn match_criterias(&self, line : &String, criterias : &Vec<String>) -> bool {
-        if line == "" {
-            return false
-        }
-
         for c in criterias {
             let re = Regex::new(c).unwrap();
 
             if re.find(line) != None {
-                return false
+                return true
             }
         }
 
-        true
+        false
     }
 }
