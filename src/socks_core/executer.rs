@@ -29,19 +29,24 @@ pub struct Executer {
 
 
 impl Executer {
-    pub fn new(c : &Configuration, s : Vec<ScriptLine>) -> Executer {
+    pub fn new(c: &Configuration, s: Vec<ScriptLine>) -> Executer {
         Executer {
             configuration : c.clone(),
             script : s,
             pc : 0,
-            connection : StringConnection::new(c.host()),
+            connection : StringConnection::new(c.host(), c.stop_byte()),
         }
     }
 
     pub fn run_script(&mut self) {
         for line in &self.script {
             if line.executable() == true {
+                println!("Send: {}", line.data());
                 self.connection.send(line.data());
+
+                if line.query() == true {
+                    println!("Receive: {}", self.connection.receive());
+                }
             }
         }
     }

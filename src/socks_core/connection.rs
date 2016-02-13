@@ -21,20 +21,23 @@ use std::net::TcpStream;
 
 pub struct Connection {
     stream : TcpStream,
+    stop_byte : u8,
 }
 
 
 impl Connection {
-    pub fn new(addr : &str) -> Connection {
+    pub fn new(addr: &str, sb: &u8) -> Connection {
         let s = TcpStream::connect(addr).unwrap();
 
         Connection {
-            stream : s
+            stream : s,
+            stop_byte : sb.clone()
         }
     }
 
     pub fn send(&mut self, data : &Vec<u8>) {
         self.stream.write(data);
+        self.stream.write(&vec![self.stop_byte]);
     }
 
     pub fn receive(&mut self, data : &mut Vec<u8>) {

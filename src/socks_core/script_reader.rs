@@ -46,7 +46,7 @@ impl ScriptReader {
         let mut count : u64 = 0;
 
         for c in content {
-            let mut data = c.clone() + "\n";
+            let mut data = c.clone();
             let mut line = ScriptLine::new_from_line(&data);
 
             line.set_number(&count);

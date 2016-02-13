@@ -27,7 +27,8 @@ fn main() {
     let config = Configuration::new(
         &vec![r"^#".to_string(), r"^$".to_string()],
         &vec![r"\?".to_string()],
-        &"localhost:40001".to_string()
+        &"localhost:40001".to_string(),
+        &0xa
         );
     let reader = ScriptReader::new(&config);
 

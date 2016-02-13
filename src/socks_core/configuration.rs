@@ -19,15 +19,21 @@ pub struct Configuration {
     non_executable_criterias : Vec<String>,
     query_criterias: Vec<String>,
     host : String,
+    stop_byte : u8,
 }
 
 
 impl Configuration {
-    pub fn new(non_exec : &Vec<String>, query : &Vec<String>, h : &String) -> Configuration {
+    pub fn new(non_exec: &Vec<String>,
+               query: &Vec<String>,
+               h: &String,
+               stop: &u8)
+               -> Configuration {
         Configuration {
             non_executable_criterias : non_exec.clone(),
             query_criterias : query.clone(),
             host : h.clone(),
+            stop_byte : stop.clone(),
         }
     }
 
@@ -36,6 +42,7 @@ impl Configuration {
             non_executable_criterias : Vec::<String>::new(),
             query_criterias: Vec::<String>::new(),
             host : String::new(),
+            stop_byte : 0,
         }
     }
 
@@ -44,6 +51,7 @@ impl Configuration {
             non_executable_criterias : self.non_executable_criterias.clone(),
             query_criterias : self.query_criterias.clone(),
             host : self.host.clone(),
+            stop_byte : self.stop_byte.clone(),
         }
     }
 
@@ -59,9 +67,14 @@ impl Configuration {
         &self.host
     }
 
+    pub fn stop_byte(&self) -> &u8 {
+        &self.stop_byte
+    }
+
     pub fn write(&self) {
         println!("{:?}", self.non_executable_criterias);
         println!("{:?}", self.query_criterias);
         println!("{}", self.host);
+        println!("{}", self.stop_byte);
     }
 }

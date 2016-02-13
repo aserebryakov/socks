@@ -19,23 +19,24 @@ use socks_core::connection::Connection;
 
 
 pub struct StringConnection {
-    connection : Connection
+    connection: Connection
 }
 
 
 impl StringConnection {
-    pub fn new(addr : &str) -> StringConnection {
+    pub fn new(addr: &str, sb: &u8) -> StringConnection {
         StringConnection {
-            connection : Connection::new(addr),
+            connection : Connection::new(addr, sb),
         }
     }
 
-    pub fn send(&mut self, data : &String) {
+    pub fn send(&mut self, data: &String) {
         self.connection.send(&data.as_bytes().to_vec());
     }
 
-    pub fn receive(&mut self, data : &mut String) {
+    pub fn receive(&mut self) -> String {
         let mut raw_data = Vec::<u8>::new();
         self.connection.receive(&mut raw_data);
+        String::from_utf8(raw_data).unwrap()
     }
 }
